@@ -1,1 +1,270 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Infernal Archives</title>
+    <style>
+        :root {
+            --blood: #8b0000;
+        }
 
+        body {
+            margin: 0;
+            background: #000;
+            min-height: 100vh;
+            font-family: 'Cinzel', serif;
+            overflow-x: hidden;
+        }
+
+        
+        .title-container {
+            text-align: center;
+            padding: 4rem 0;
+            position: relative;
+        }
+
+        .main-title {
+            display: inline-flex;
+            align-items: center;
+            gap: 1rem;
+            font-size: 4rem;
+            color: #fff;
+            cursor: pointer;
+        }
+
+        .title-cross {
+            transition: transform 1.5s cubic-bezier(0.4, 0, 0.2, 1),
+                        color 1.5s,
+                        filter 0.3s;
+            font-size: 3rem;
+            transform: translateX(0.5cm);
+            filter: drop-shadow(0 0 5px #fff);
+        }
+
+        .title-cross:hover {
+            animation: cross-shake 0.1s infinite;
+        }
+
+        @keyframes cross-shake {
+            0%, 100% { transform: translateX(0.5cm) rotate(0deg); }
+            25% { transform: translateX(0.6cm) rotate(2deg); }
+            75% { transform: translateX(0.4cm) rotate(-2deg); }
+        }
+
+        .purgatory-text {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            opacity: 0;
+            color: var(--blood);
+            pointer-events: none;
+            text-shadow: 0 0 15px var(--blood);
+        }
+
+        
+        .curse-text {
+            color: #444;
+            text-align: center;
+            max-width: 600px;
+            margin: 2rem auto;
+            line-height: 1.7;
+            font-size: 1.1rem;
+        }
+
+        .curse-text span {
+            display: inline-block;
+            transition: 0.05s linear;
+            position: relative;
+        }
+
+        
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 4rem;
+            padding: 6rem;
+        }
+
+        .frame {
+            border: 3px solid #1a1a1a;
+            transition: 0.4s;
+            position: relative;
+            background: #000;
+            overflow: hidden;
+            box-shadow: 0 0 30px #00000080;
+        }
+
+        .frame::before {
+            content: '';
+            position: absolute;
+            inset: -5px;
+            border: 2px solid var(--blood);
+            opacity: 0;
+            transition: 0.4s;
+            filter: blur(3px);
+        }
+
+        .frame:hover {
+            transform: rotate(2deg);
+            border-color: var(--blood);
+        }
+
+        .frame:hover::before {
+            opacity: 0.3;
+            animation: border-pulse 1s infinite;
+        }
+
+        @keyframes border-pulse {
+            50% { opacity: 0.1; }
+        }
+
+        .frame img {
+            width: 100%;
+            height: 500px;
+            object-fit: cover;
+            filter: contrast(130%) grayscale(100%);
+            transition: 0.4s;
+        }
+
+        /* Анимированные кресты */
+        .cross {
+            position: absolute;
+            font-size: 2rem;
+            color: #3a0000;
+            opacity: 0;
+            pointer-events: none;
+            animation: cross-terror 1.5s infinite;
+        }
+
+        @keyframes cross-terror {
+            0% { transform: translate(0,0) rotate(0deg); }
+            20% { transform: translate(5px,-3px) rotate(2deg); }
+            40% { transform: translate(-3px,4px) rotate(-3deg); }
+            60% { transform: translate(4px,2px) rotate(5deg); }
+            80% { transform: translate(-2px,-5px) rotate(-2deg); }
+            100% { transform: translate(0,0) rotate(0deg); }
+        }
+
+        .clan-name {
+            position: absolute;
+            bottom: -30px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: #5a0000;
+            font-size: 1.2rem;
+            opacity: 0;
+            transition: 0.3s;
+            text-shadow: 0 0 10px #5a0000;
+        }
+
+        .frame:hover .clan-name {
+            opacity: 1;
+        }
+    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="title-container">
+        <div class="main-title" id="titleTrigger">
+            <span id="punishingText">Punishing</span>
+            <div class="title-cross">✝</div>
+            <div class="purgatory-text">Purgatory</div>
+        </div>
+        
+        <div class="curse-text" id="curseText">
+            <span>Г</span><span>р</span><span>е</span><span>х</span><span> </span>
+            <span>п</span><span>р</span><span>о</span><span>н</span><span>и</span><span>к</span><span>н</span><span>е</span><span>т</span><span> </span>
+            <span>в</span><span> </span><span>к</span><span>о</span><span>с</span><span>т</span><span>и</span><span>,</span><span> </span>
+            <span>о</span><span>г</span><span>о</span><span>н</span><span>ь</span><span> </span>
+            <span>п</span><span>р</span><span>о</span><span>ж</span><span>е</span><span>т</span><span> </span>
+            <span>д</span><span>у</span><span>ш</span><span>у</span><span> </span>
+            <span>д</span><span>о</span><span> </span>
+            <span>п</span><span>о</span><span>с</span><span>л</span><span>е</span><span>д</span><span>н</span><span>е</span><span>й</span><span> </span>
+            <span>и</span><span>с</span><span>к</span><span>р</span><span>ы</span>
+        </div>
+    </div>
+
+    <div class="gallery">
+        <div class="frame">
+            <img src="clan1.jpg" alt="Zog Shut Up">
+            <div class="clan-name">«Zog Shut Up»</div>
+        </div>
+        <div class="frame">
+            <img src="clan2.jpg" alt="KTSP">
+            <div class="clan-name">«$KTSP»</div>
+        </div>
+    </div>
+
+    <script>
+        // Анимация заголовка
+        const titleTrigger = document.getElementById('titleTrigger');
+        const crossElement = document.querySelector('.title-cross');
+        const punishingText = document.getElementById('punishingText');
+        const purgatoryText = document.querySelector('.purgatory-text');
+        const curseLetters = document.querySelectorAll('#curseText span');
+        let isActive = false;
+
+        crossElement.addEventListener('transitionend', () => {
+            if(!isActive) return;
+            punishingText.style.opacity = '0';
+            purgatoryText.style.opacity = '1';
+            animateCurse(true);
+        });
+
+        titleTrigger.addEventListener('mouseenter', () => {
+            if(isActive) return;
+            isActive = true;
+            crossElement.style.transform = 'translateX(0.5cm) rotate(180deg)';
+            crossElement.style.color = 'var(--blood)';
+            crossElement.style.filter = 'drop-shadow(0 0 10px var(--blood))';
+        });
+
+        
+        function animateCurse(start) {
+            if(start) {
+                curseLetters.forEach(letter => {
+                    letter.style.transform = `
+                        translate(${Math.random() * 10 - 5}px, 
+                        ${Math.random() * 10 - 5}px)
+                        rotate(${Math.random() * 15 - 7.5}deg)
+                    `;
+                });
+            }
+        }
+
+        // Генератор крестов для галереи
+        document.querySelectorAll('.frame').forEach(frame => {
+            let crossInterval;
+
+            frame.addEventListener('mouseenter', () => {
+                const crossCount = Math.floor(Math.random() * 9) + 7;
+                for(let i = 0; i < crossCount; i++) {
+                    const cross = document.createElement('div');
+                    cross.className = 'cross';
+                    cross.style.left = `${Math.random() * 100}%`;
+                    cross.style.top = `${Math.random() * 100}%`;
+                    cross.innerHTML = Math.random() > 0.5 ? '†' : '✝';
+                    cross.style.fontSize = `${Math.random() * 2 + 1}rem`;
+                    cross.style.animationDelay = `${Math.random() * 2}s`;
+                    document.body.appendChild(cross);
+                    setTimeout(() => cross.style.opacity = '0.7', 50);
+                }
+
+                crossInterval = setInterval(() => {
+                    document.querySelectorAll('.cross').forEach(cross => {
+                        cross.style.transform = `
+                            translate(${Math.random() * 10 - 5}px, 
+                            ${Math.random() * 10 - 5}px)
+                        `;
+                    });
+                }, 50);
+            });
+
+            frame.addEventListener('mouseleave', () => {
+                document.querySelectorAll('.cross').forEach(cross => cross.remove());
+                clearInterval(crossInterval);
+            });
+        });
+    </script>
+</body>
+</html>
